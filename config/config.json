@@ -1,0 +1,10 @@
+
+{
+    "adminNumbers": ["5511999999999@c.us"],
+    "groupName" : ["group"],
+    "groupNameDel" : ["groupex"],
+    "messages": {
+        "message1": "🚨 *ATENÇÂO* 🚨",
+        "msgQrCode": "🚨 *PASSO A PASSO* 🚨"
+    }
+}
