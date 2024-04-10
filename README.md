@@ -12,7 +12,7 @@ Antes de usar o bot, é necessário configurar algumas coisas:
 
 ```json
 {
-    "adminNumbers": ["exemplo1@c.us", "exemplo2@c.us", "exemplo3@c.us"],
+    "adminNumbers": ["5511999999999@c.us", "exemplo2@c.us", "exemplo3@c.us"],
     "groupName" : [" "],
     "groupNameDel" : [" "],
     "messages": {
