@@ -1,6 +1,5 @@
 const { MessageMedia } = require('whatsapp-web.js');
 const config = require('../config/config.json');
-const qrcode = require('./userCmd/qrcode.js')
 const userCommands = require('./userCommands.js');
 
 qrcode
