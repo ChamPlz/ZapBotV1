@@ -2,7 +2,6 @@ const { MessageMedia } = require('whatsapp-web.js');
 const config = require('../config/config.json');
 const userCommands = require('./userCommands.js');
 
-qrcode
 
 module.exports = {
     isAdminCommand: function (message) {
