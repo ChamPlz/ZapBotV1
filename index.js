@@ -10,12 +10,7 @@ const app = express();
 const port = process.env.PORT || 3000;
 
 // Criar uma instância do cliente WhatsApp
-const client = new Client({
-    webVersionCache: {
-        type: 'remote',
-        remotePath: 'https://raw.githubusercontent.com/wppconnect-team/wa-version/main/html/2.2410.1.html',
-    },
-});
+const client = new Client({});
 
 // Configurar eventos do cliente WhatsApp
 client.on('qr', qr => {
