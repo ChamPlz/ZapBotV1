@@ -5,7 +5,6 @@ const cron = require('node-cron');
 const adminCommands = require('./commands/adminCommands');
 const userCommands = require('./commands/userCommands');
 const sendMessageToGroups = require('./utils/sendMessageToGroups.js');
-const feriadoFunc = require('./commands/feriadoFunc.js');
 
 const app = express();
 const port = process.env.PORT || 3000;
@@ -33,7 +32,7 @@ client.on('ready', () => {
 
     // Configurar agendamentos com cron
     cron.schedule('0 12 * * *', () => {
-        sendMessageToGroups.sendMessage(client, './config/imagens/adminImag/recusa.jpeg', "🚨 *ATENÇÂO* 🚨");
+        sendMessageToGroups.sendMessage(client, './config/imagens/adminImag/teste.jpeg', "🚨 *ATENÇÂO* 🚨");
     });
 
     // Outros agendamentos
@@ -43,10 +42,11 @@ client.on('ready', () => {
 
 client.on('message', async message => {
     // Verificar comandos de admin ou usuário
-    if (message.body.startsWith("!")) {
+    if (message.body.indexOf("-") !== 0) { return } else {
         if (adminCommands.isAdminCommand(message)) {
             adminCommands.handleAdminCommand(client, message);
         } else {
+            // Verificar se é um comando de usuário comum
             userCommands.handleUserCommand(client, message);
         }
     }
