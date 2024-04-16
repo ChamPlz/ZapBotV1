@@ -3,7 +3,7 @@ FROM node:14
 
 # Instale dependências do sistema necessárias para o Puppeteer
 RUN apt-get update && apt-get install -y \
-    libatk-1.0-0 \
+    libatk1.0-0 \
     libatk-bridge2.0-0 \
     libpangocairo-1.0-0 \
     libpango-1.0-0 \
