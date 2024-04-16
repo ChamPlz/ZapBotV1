@@ -1,4 +1,3 @@
-const express = require('express');
 const { Client } = require('whatsapp-web.js');
 const qrcode = require('qrcode-terminal');
 const cron = require('node-cron');
@@ -6,15 +5,15 @@ const adminCommands = require('./commands/adminCommands');
 const userCommands = require('./commands/userCommands');
 const sendMessageToGroups = require('./utils/sendMessageToGroups.js');
 
-const app = express();
-const port = process.env.PORT || 3000;
+const client = new Client({
+    webVersionCache: {
+        type: 'remote',
+        remotePath: 'https://raw.githubusercontent.com/wppconnect-team/wa-version/main/html/2.2410.1.html',
+    },
+});
 
-// Criar uma instância do cliente WhatsApp
-const client = new Client({puppeteer: { args: ["--no-sandbox", '--disable-setuid-sandbox'], headless: true, }})
 
 
-
-// Configurar eventos do cliente WhatsApp
 client.on('qr', qr => {
     console.log('QR code gerado. Escaneie-o com seu telefone.');
     qrcode.generate(qr, { small: true });
@@ -27,19 +26,18 @@ client.on('authenticated', () => {
 client.on('ready', () => {
     console.log('Cliente WhatsApp está pronto!');
 
-    // Configurar agendamentos com cron
+    // Agendar o envio de mensagens
     cron.schedule('0 12 * * *', () => {
-        sendMessageToGroups.sendMessage(client, './config/imagens/adminImag/teste.jpeg', "🚨 *ATENÇÂO* 🚨");
+        sendMessageToGroups.sendMessage(client, './config/imagens/adminIamg/recusa.jpeg', "🚨 *ATENÇÂO* 🚨");
     });
-
-    // Outros agendamentos
-
-    // Configure outras tarefas cron aqui
+    cron.schedule('0 9,17 * * *', () => {
+        sendMessageToGroups.sendMessage(client, './config/doc/adminDoc/como localizar os treinamentos.pdf', "🚨 *EVITE BLOQUEIOS FAZENDO OS TREINAMENTOS DISPONIBILIZADOS PELO MERCADO LIVRE!* 🚨\nOBS: Bloqueio depois 72HRs com treinamentos pendentes.");
+    });
 });
 
 client.on('message', async message => {
-    // Verificar comandos de admin ou usuário
-    if (message.body.indexOf("-") !== 0) { return } else {
+    // Verificar se é um comando de administrador
+    if (message.body.indexOf("!") !== 0) { return } else {
         if (adminCommands.isAdminCommand(message)) {
             adminCommands.handleAdminCommand(client, message);
         } else {
@@ -50,21 +48,3 @@ client.on('message', async message => {
 });
 
 client.initialize();
-
-// Rotas para API
-app.get('/', (req, res) => {
-    res.send('WhatsApp Bot Web Service');
-});
-
-app.post('/send-message', async (req, res) => {
-    const { number, message } = req.body;
-
-    // Adicione código para enviar uma mensagem usando o cliente WhatsApp
-    await client.sendMessage(number, message);
-    res.status(200).send('Mensagem enviada');
-});
-
-// Inicie o servidor
-app.listen(port, () => {
-    console.log(`Servidor rodando em http://localhost:${port}`);
-});
