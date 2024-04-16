@@ -10,7 +10,9 @@ const app = express();
 const port = process.env.PORT || 3000;
 
 // Criar uma instância do cliente WhatsApp
-const client = new Client({ puppeteer: { headless: true,args: ['--no-sandbox', '--disable-setuid-sandbox']}});
+const client = new Client({puppeteer: { args: ["--no-sandbox", '--disable-setuid-sandbox'], headless: true, }})
+
+
 
 // Configurar eventos do cliente WhatsApp
 client.on('qr', qr => {
