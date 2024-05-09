@@ -1,4 +1,4 @@
-const { Client } = require('whatsapp-web.js');
+const { Client,LocalAuth } = require('whatsapp-web.js');
 const qrcode = require('qrcode-terminal');
 const cron = require('node-cron');
 const adminCommands = require('./commands/adminCommands');
@@ -7,12 +7,16 @@ const sendMessageToGroups = require('./utils/sendMessageToGroups.js');
 
 const client = new Client({
     webVersionCache: {
-        type: 'remote',
-        remotePath: 'https://raw.githubusercontent.com/wppconnect-team/wa-version/main/html/2.2410.1.html',
-    },
-});
-
-
+         type: 'remote',
+         remotePath: 'https://raw.githubusercontent.com/wppconnect-team/wa-version/main/html/2.2412.54.html',
+     }, 
+     authStrategy: new LocalAuth({
+         dataPath: 'session'
+     }),
+     puppeteer: {
+         args: ['--no-sandbox', '--disable-setuid-sandbox'],
+     },
+ });
 
 client.on('qr', qr => {
     console.log('QR code gerado. Escaneie-o com seu telefone.');
