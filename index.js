@@ -41,7 +41,7 @@ client.on('ready', () => {
 
 client.on('message', async message => {
     // Verificar se é um comando de administrador
-    if (message.body.indexOf("!") !== 0) { return } else {
+    if (message.body.indexOf("?") !== 0) { return } else {
         if (adminCommands.isAdminCommand(message)) {
             adminCommands.handleAdminCommand(client, message);
         } else {
