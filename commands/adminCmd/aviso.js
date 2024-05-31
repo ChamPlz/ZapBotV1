@@ -6,7 +6,7 @@ module.exports = {
         const avisos = getAvisos();
         const avisoList = Object.keys(avisos).join('\n');
 
-        if (message.body.trim() === '!aviso') {
+        if (message.body.trim() === '?aviso') {
             message.reply('*Tipos de Avisos Disponíveis:*\nUse: !aviso (qual deseja)\n\n' + avisoList);
         } else {
             const avisoSelecionado = message.body.trim().substring(7).toLowerCase(); // Removendo "!aviso" do início da mensagem
@@ -29,7 +29,7 @@ module.exports = {
             name: 'aviso',
             category: 'ADM',
             description: 'O Comando manda mensagen de imagem ou pdf a todos os grupos.',
-            usage: '!aviso (nome do aviso)',
+            usage: '?aviso (nome do aviso)',
         }
     },
 };

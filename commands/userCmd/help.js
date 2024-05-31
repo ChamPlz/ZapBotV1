@@ -27,6 +27,6 @@ module.exports = {
         name: 'help',
         category: 'Útil',
         description: 'Os Comandos.',
-        usage: '!help',
+        usage: '?help',
     },
 };

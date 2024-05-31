@@ -12,7 +12,7 @@ module.exports = {
             name: 'teste',
             category: 'arquivo',
             description: 'O Comando manda uma imagem',
-            usage: '!palavra',
+            usage: '?palavra',
         }
     },
 }

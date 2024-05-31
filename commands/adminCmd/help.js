@@ -36,6 +36,6 @@ module.exports = {
         name: 'help',
         category: 'Útil',
         description: 'Os Comandos de adm.',
-        usage: '!help',
+        usage: '?help',
     },
 };
